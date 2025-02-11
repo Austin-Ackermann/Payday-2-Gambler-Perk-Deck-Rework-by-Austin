@@ -1,0 +1,9 @@
+<table name="Gambler Perk Deck Rework by Austin" priority="-31">
+
+	<Localization directory="Localization" default="english.txt">
+	</Localization>
+	
+	<Hooks directory="Hooks">
+		<hook file="skilltreetweakdata.lua" source_file="lib/tweak_data/skilltreetweakdata"/>
+	</Hooks>
+</table>
