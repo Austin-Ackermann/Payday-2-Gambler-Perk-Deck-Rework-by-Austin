@@ -48,7 +48,7 @@ Hooks:PostHook(UpgradesTweakData, "_player_definitions", "upgradestweak_ply_defi
 	self.gambler_unlucky_cap = 50 -- the unluckiest you could possibly be. default: 50 AKA 50% chance of failure.
 	self.gambler_max_lucky_dodge_stacks = 40 -- default: 40 AKA 40% dodge chance in game
 	self.gambler_lucky_dodge_incriment = 5 -- default: 5 AKA 5% dodge chance in game
-	self.gambler_lucky_dodge_decriment = {-10} -- default: -10 AKA 40% dodge chance in game
+	self.gambler_lucky_dodge_decriment = -10 -- default: -10 AKA 40% dodge chance in game
 
 	self.definitions.player_gambler_dodge = {
 		name_id = "player_gambler_dodge",

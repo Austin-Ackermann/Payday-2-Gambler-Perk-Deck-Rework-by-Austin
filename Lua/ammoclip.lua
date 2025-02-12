@@ -1,19 +1,25 @@
 -- init
 Hooks: PostHook(AmmoClip, "init", "ammoclip_init_byp", function(self, unit) 
-    self.gambler_lucky_dodge_stacks = 0 
-    self.gambler_dodge_difference = 0
+    self.gambler_lucky_dodge_stacks = 40
+	self.gambler_dodge_difference = 40
     self.gambler_unlucky_cap = tweak_data.upgrades.gambler_unlucky_cap
     self.gambler_max_lucky_dodge_stacks = tweak_data.upgrades.gambler_max_lucky_dodge_stacks
     self.gambler_lucky_dodge_incriment = tweak_data.upgrades.gambler_lucky_dodge_incriment
     self.gambler_lucky_dodge_decriment = tweak_data.upgrades.gambler_lucky_dodge_decriment
 end)
 
+function getGamblerDodgeInfo(self)
+    return {
+        self.gambler_lucky_dodge_stacks,
+        self.gambler_dodge_difference
+    }
+end
+
 local player_manager = managers.player
 
 Hooks: PostHook(AmmoClip, "_pickup", function(self, unit) 
     local inventory = unit:inventory()
-    self.gambler_dodge_difference = 0
-
+    
     if self.picked_up then
         -- when healing from picking up ammo
         if not unit:character_damage():is_downed() and player_manager:has_category_upgrade("temporary", "loose_ammo_restore_health") and not player_manager:has_activate_temporary_upgrade("temporary", "loose_ammo_restore_health") then
@@ -21,6 +27,7 @@ Hooks: PostHook(AmmoClip, "_pickup", function(self, unit)
             if player_manager:has_category_upgrade("player", "gambler_dodge") then
                 -- Dodge luck calculation
                 local old_lucky_dodge_stacks = self.gambler_lucky_dodge_stacks
+                local new_dodge_difference = 0
                 
                 -- self._ammo_count is the ammo that has been picked up. 
                 -- get the average of all weapon ammo
@@ -65,7 +72,7 @@ Hooks: PostHook(AmmoClip, "_pickup", function(self, unit)
                     -- unlucky, remove 10% dodge chance if the buff is greater than 0, otherwise set it to 0. 
                     -- if old_lucky_dodge_stacks > (gambler_lucky_dodge_decriment * -1) then
                         -- new_lucky_dodge_stacks = new_lucky_dodge_stacks + gambler_lucky_dodge_decriment
-                        self.gambler_dodge_difference = self.gambler_lucky_dodge_decriment
+                        new_dodge_difference = self.gambler_lucky_dodge_decriment
                     -- else
 
                         -- new_lucky_dodge_stacks = 0
@@ -73,22 +80,23 @@ Hooks: PostHook(AmmoClip, "_pickup", function(self, unit)
                     -- lucky, add 5% dodge chance if the buff is less than 0.4, otherwise do nothing
                     -- if new_lucky_dodge_stacks < gambler_max_lucky_dodge_stacks / 100 then
                         -- new_lucky_dodge_stacks = new_lucky_dodge_stacks + gambler_lucky_dodge_incriment
-                        self.gambler_dodge_difference = self.gambler_lucky_dodge_incriment
+                        new_dodge_difference = self.gambler_lucky_dodge_incriment
                     -- end
                 end
 
                 -- check
-                local new_lucky_dodge_stacks = self.gambler_lucky_dodge_stacks + self.gambler_dodge_difference
+                local new_lucky_dodge_stacks = self.gambler_lucky_dodge_stacks + new_dodge_difference
                 -- if the new value is higher than the cap, the dodge difference must make bring the current stacks to the cap
                 if (new_lucky_dodge_stacks > self.gambler_max_lucky_dodge_stacks) then 
-                    self.gambler_dodge_difference = self.gambler_max_lucky_dodge_stacks - self.gambler_lucky_dodge_stacks
+                    new_dodge_difference = self.gambler_max_lucky_dodge_stacks - self.gambler_lucky_dodge_stacks
                 -- if the buff is less than zero, the dodge difference must make bring the current stacks to zero
                 else if (new_lucky_dodge_stacks < 0) then
-                    self.gambler_dodge_difference = -self.gambler_lucky_dodge_stacks 
+                    new_dodge_difference = -self.gambler_lucky_dodge_stacks 
                 end
+
+                self.gambler_dodge_difference = new_dodge_difference
                 
                 -- todo: 
-                -- pass the function correctly. ref: perk deck mod function: 
                 -- get the current ammo correctly ref: updating the hud ammo
                 -- to test if ammo works correctly, set dodge to be exactly equal to ammo percentage.
                 -- apply the current dodge correctly. ref: sicario armor dodge.
@@ -96,17 +104,3 @@ Hooks: PostHook(AmmoClip, "_pickup", function(self, unit)
         end
     end
 end)
-
--- apply the dodge
---v1.1 rewrote this to be future-proof, and it should be extremely less likely to conflict with other mods now,
---since it no longer overwrites the dodge calc function (at least, not really)
-local orig_calc_dodge = player_manager.skill_dodge_chance
-function player_manager:skill_dodge_chance(...)
-    local chance = 0
-    
-	chance = chance + orig_calc_dodge(self,...)
-
-    chance = change + self.gambler_lucky_dodge_stacks + self.gambler_dodge_difference
-    
-    return chance
-end
