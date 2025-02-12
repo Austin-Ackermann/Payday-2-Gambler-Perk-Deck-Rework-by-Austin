@@ -139,9 +139,9 @@ function SkillTreeTweakData:init(tweak_data)
 	-- end
 
 	-- replacing the grinder deck with our new one
-	-- self.specializations[10] = newGambler -- will always be at index 9 when initialised.
+	self.specializations[10] = newGambler -- will always be at index 9 when initialised.
 	
-	table.insert(self.specializations, newGambler)
+	-- table.insert(self.specializations, newGambler)
 	
 	-- local newDeck = 	{
 	-- 	name_id = "menu_st_spec_0",

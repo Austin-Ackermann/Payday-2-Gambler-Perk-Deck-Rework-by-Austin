@@ -11,15 +11,15 @@
 	"hooks"	:   [
 		{ 
 			"hook_id"	: "lib/tweak_data/skilltreetweakdata", 
-			"script_path" : "skilltree.lua" 
+			"script_path" : "Lua/skilltree.lua" 
 		},
 		{ 
 			"hook_id" : "lib/tweak_data/upgradestweakdata", 
-			"script_path" : "upgradestweak.lua" 
+			"script_path" : "Lua/upgradestweak.lua" 
 		},
 		{ 
 			"hook_id" : "lib/units/pickups/ammoclip", 
-			"script_path" : "ammoclip.lua" 
+			"script_path" : "Lua/ammoclip.lua" 
 		}
 	]
 }
