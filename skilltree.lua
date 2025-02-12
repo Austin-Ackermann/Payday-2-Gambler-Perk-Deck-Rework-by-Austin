@@ -114,10 +114,7 @@ function SkillTreeTweakData:init(tweak_data)
 			upgrades = {
 				"player_passive_loot_drop_multiplier",
 				"temporary_loose_ammo_restore_health_3",
-				-- "temporary_armor_break_invulnerable_1", -- invulnerable for 2 seconds when armor broken, for testing.
-				-- "player_wild_armor_amount_1",
-				"player_armor_health_store_amount_1"
-				-- add new dodge gain ability here
+				"player_gambler_dodge" -- new dodge mechanic
 			},
 			icon_xy = {
 				0,

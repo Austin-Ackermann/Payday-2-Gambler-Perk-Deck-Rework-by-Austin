@@ -44,6 +44,24 @@ function UpgradesTweakData:init(tweak_data)
 			0 -- default: 5 AKA 5 second cooldown between ammo pickups. 
 		}
 	}
+
+	-- gambler's dodge
+	-- When picking up ammo, add 5% dodge chance, up to 40% increase. Chance to lose 10% dodge chance instead (cannot go below 0), which depends on the percentage of ammo you have remaining (max 50% chance).
+	self.values.player.gambler_unlucky_cap = 50 -- the unluckiest you could possibly be. default: 50 AKA 50% chance of failure.
+	self.values.player.gambler_max_lucky_dodge_stacks = 40 -- default: 40 AKA 40% dodge chance in game
+	self.values.player.gambler_lucky_dodge_incriment = 5 -- default: 5 AKA 5% dodge chance in game
+	self.values.player.gambler_lucky_dodge_decriment = -10 -- default: -10 AKA 40% dodge chance in game
+
+	self.definitions.player_gambler_dodge = {
+		name_id = "player_gambler_dodge",
+		category = "feature",
+		upgrade = {
+			value = 1,
+			upgrade = "gambler_dodge",
+			category = "player"
+		}
+	}
+
 	-- /GAMBLER CHANGES --
 	
 end
