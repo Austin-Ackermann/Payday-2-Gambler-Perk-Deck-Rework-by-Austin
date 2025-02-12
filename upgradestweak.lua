@@ -1,15 +1,11 @@
-local old_init = UpgradesTweakData.init
-function UpgradesTweakData:init(tweak_data)
-	old_init(self, tweak_data)
-
-	-- GAMBLER CHANGES --
+Hooks:PostHook(UpgradesTweakData, "_init_pd2_values", "upgradestweak_init_byp", function(self)
 	-- Lowering gambler health and ammo gain but removing the cooldowns. 
 	
 	-- player healing
 	self.values.temporary.loose_ammo_restore_health = {}
 	for i, data in ipairs(self.loose_ammo_restore_health_values) do
 		local base = self.loose_ammo_restore_health_values.base -- AKA 8 hp in game
-
+		
 		table.insert(self.values.temporary.loose_ammo_restore_health, {
 			{
 				math.ceil((base + data[1]) * 0.2), -- lowering the health regen to compensate for the cooldown change
@@ -22,7 +18,7 @@ function UpgradesTweakData:init(tweak_data)
 	-- teammates healing
 	for i, data in ipairs(self.loose_ammo_restore_health_values) do
 		local base = self.loose_ammo_restore_health_values.base -- AKA 8 hp in game
-
+		
 		table.insert(self.values.temporary.loose_ammo_restore_health, {
 			{
 				math.ceil((base + data[1]) * 0.2), -- lowering the health regen to compensate for the cooldown change
@@ -30,7 +26,7 @@ function UpgradesTweakData:init(tweak_data)
 			},
 			self.loose_ammo_restore_health_values.cd
 		})
-	
+		
 	end
 	
 	-- teammates ammo
@@ -44,24 +40,37 @@ function UpgradesTweakData:init(tweak_data)
 			0 -- default: 5 AKA 5 second cooldown between ammo pickups. 
 		}
 	}
+end)
 
+local old_UpgradesTweakData_temporary_definitions = UpgradesTweakData._temporary_definitions
+function UpgradesTweakData:_temporary_definitions()
+	old_UpgradesTweakData_temporary_definitions(self)
+-- Hooks:PostHook(UpgradesTweakData, "_temporary_definitions", "upgradestweak_temp_definitions_byp", function(self)
 	-- gambler's dodge
 	-- When picking up ammo, add 5% dodge chance, up to 40% increase. Chance to lose 10% dodge chance instead (cannot go below 0), which depends on the percentage of ammo you have remaining (max 50% chance).
-	self.values.player.gambler_unlucky_cap = 50 -- the unluckiest you could possibly be. default: 50 AKA 50% chance of failure.
-	self.values.player.gambler_max_lucky_dodge_stacks = 40 -- default: 40 AKA 40% dodge chance in game
-	self.values.player.gambler_lucky_dodge_incriment = 5 -- default: 5 AKA 5% dodge chance in game
-	self.values.player.gambler_lucky_dodge_decriment = -10 -- default: -10 AKA 40% dodge chance in game
+	self.gambler_unlucky_cap = 50 -- the unluckiest you could possibly be. default: 50 AKA 50% chance of failure.
+	self.gambler_max_lucky_dodge_stacks = 40 -- default: 40 AKA 40% dodge chance in game
+	self.gambler_lucky_dodge_incriment = 5 -- default: 5 AKA 5% dodge chance in game
+	self.gambler_lucky_dodge_decriment = {-10} -- default: -10 AKA 40% dodge chance in game
 
-	self.definitions.player_gambler_dodge = {
-		name_id = "player_gambler_dodge",
-		category = "feature",
+	-- self.definitions.player_gambler_dodge = {
+	-- 	name_id = "player_gambler_dodge",
+	-- 	category = "temporary",
+	-- 	upgrade = {
+	-- 		value = 1,
+	-- 		upgrade = "gambler_dodge_perk",
+	-- 		category = "temporary"
+	-- 	}
+	-- }
+
+	self.definitions.player_gambler_dodge_2 = {
+		name_id = "player_gambler_dodge_2",
+		category = "temporary",
 		upgrade = {
 			value = 1,
-			upgrade = "gambler_dodge",
-			category = "player"
+			upgrade = "gambler_dodge_perk_2",
+			category = "temporary"
 		}
 	}
-
-	-- /GAMBLER CHANGES --
-	
+-- end)
 end

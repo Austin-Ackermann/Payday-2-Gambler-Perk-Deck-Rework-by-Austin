@@ -114,7 +114,7 @@ function SkillTreeTweakData:init(tweak_data)
 			upgrades = {
 				"player_passive_loot_drop_multiplier",
 				"temporary_loose_ammo_restore_health_3",
-				"player_gambler_dodge" -- new dodge mechanic
+				"player_gambler_dodge_2" 
 			},
 			icon_xy = {
 				0,
@@ -126,6 +126,9 @@ function SkillTreeTweakData:init(tweak_data)
 		category = "supportive"
 	}
 	
+	-- new dodge mechanic -- as soon as it is equiped, the game crashes: tried to index null value in playermanager. Turns out it was because this comment was next to it. 
+
+
 	-- finding the gambler deck
 	-- for deckIndex = i in self.specializations do
 	-- 	if i.name_id = "menu_st_spec_10" do
@@ -136,9 +139,9 @@ function SkillTreeTweakData:init(tweak_data)
 	-- end
 
 	-- replacing the grinder deck with our new one
-	self.specializations[10] = newGambler -- will always be at index 9 when initialised.
+	-- self.specializations[10] = newGambler -- will always be at index 9 when initialised.
 	
-	-- table.insert(self.specializations, newGambler)
+	table.insert(self.specializations, newGambler)
 	
 	-- local newDeck = 	{
 	-- 	name_id = "menu_st_spec_0",
