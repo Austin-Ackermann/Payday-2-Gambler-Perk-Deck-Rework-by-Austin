@@ -3,7 +3,7 @@
 -- end)
 
 function PlayerManager:get_perm_dodge_buff()
-    return self.perm_dodge_buff or 0
+    return self.perm_dodge_buff
 end
 
 function PlayerManager:update_perm_dodge_buff(value)
@@ -17,11 +17,11 @@ PlayerManager.perm_dodge_buff = 0
 -- apply the dodge
 local orig_calc_dodge = PlayerManager.skill_dodge_chance
 function PlayerManager:skill_dodge_chance(...)
+    -- causes bug if updated too many times in one frame where dodge rises exponentially. Need a cooldown to prevent this. 
+    
     local chance = 0
     chance = chance + orig_calc_dodge(self,...)
     local buffy = self:get_perm_dodge_buff()
     chance = chance + buffy
-    -- chance = chance + 0.2
-
     return chance
 end
