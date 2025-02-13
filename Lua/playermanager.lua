@@ -12,7 +12,7 @@ function PlayerManager:update_perm_dodge_buff(value)
     self.perm_dodge_buff = new_buff
 end
 
-PlayerManager.perm_dodge_buff = 0.1 -- 30% dodge chance
+PlayerManager.perm_dodge_buff = 0
 
 -- apply the dodge
 local orig_calc_dodge = PlayerManager.skill_dodge_chance
