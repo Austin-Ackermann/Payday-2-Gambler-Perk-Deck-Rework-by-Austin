@@ -45,11 +45,11 @@ end)
 Hooks:PostHook(UpgradesTweakData, "_temporary_definitions", "upgradestweak_tmp_definitions_byp", function(self)
 	-- gambler's dodge
 	-- When picking up ammo, add 5% dodge chance, up to 40% increase. Chance to lose 10% dodge chance instead (cannot go below 0), which depends on the percentage of ammo you have remaining (max 50% chance).
-	self.gambler_max_lucky_dodge_stacks = 0.4 -- default: 40 AKA 40% dodge chance in game
-	self.gambler_lucky_dodge_incriment = 0.07 -- default: 0.05 AKA 5% dodge chance in game
-	self.gambler_lucky_dodge_decriment = -0.03 -- default: -0.1 AKA 10% dodge chance in game
+	self.gambler_max_lucky_dodge_stacks = 0.5 -- default: 40 AKA 40% dodge chance in game
+	self.gambler_lucky_dodge_incriment = 0.05 -- default: 0.05 AKA 5% dodge chance in game
+	self.gambler_lucky_dodge_decriment = -0.1 -- default: -0.1 AKA 10% dodge chance in game
 	self.gambler_unlucky_chance_cap = 0.5 -- default: 0.5 AKA 50% chance of failure.
-    self.gambler_unlucky_chance_position = 0.5 -- default: 0.7 AKA unluck caps out at 70% ammo remaining.
+    self.gambler_unlucky_chance_position = 0.7 -- default: 0.7 AKA unluck caps out at 70% ammo remaining.
 
 	-- self.definitions.player_gambler_dodge = {
 	-- 	name_id = "player_gambler_dodge",
