@@ -42,7 +42,7 @@ Hooks:PostHook(UpgradesTweakData, "_init_pd2_values", "upgradestweak_init_byp", 
 	}
 end)
 
-Hooks:PostHook(UpgradesTweakData, "_player_definitions", "upgradestweak_ply_definitions_byp", function(self)
+Hooks:PostHook(UpgradesTweakData, "_temporary_definitions", "upgradestweak_tmp_definitions_byp", function(self)
 	-- gambler's dodge
 	-- When picking up ammo, add 5% dodge chance, up to 40% increase. Chance to lose 10% dodge chance instead (cannot go below 0), which depends on the percentage of ammo you have remaining (max 50% chance).
 	self.gambler_unlucky_cap = 50 -- the unluckiest you could possibly be. default: 50 AKA 50% chance of failure.
@@ -50,13 +50,22 @@ Hooks:PostHook(UpgradesTweakData, "_player_definitions", "upgradestweak_ply_defi
 	self.gambler_lucky_dodge_incriment = 5 -- default: 5 AKA 5% dodge chance in game
 	self.gambler_lucky_dodge_decriment = -10 -- default: -10 AKA 40% dodge chance in game
 
-	self.definitions.player_gambler_dodge = {
-		name_id = "player_gambler_dodge",
-		category = "feature",
-		upgrade = {
-			value = 1,
-			upgrade = "gambler_dodge_perk",
-			category = "player"
-		}
-	}
+	-- self.definitions.player_gambler_dodge = {
+	-- 	name_id = "player_gambler_dodge",
+	-- 	category = "feature",
+	-- 	upgrade = {
+	-- 		value = 1,
+	-- 		upgrade = "gambler_dodge_perk",
+	-- 		category = "player"
+	-- 	}
+	-- }
+	-- self.definitions.temporary_gam_luk_1 = {
+	-- 	name_id = "menu_temporary_gam_luk",
+	-- 	category = "temporary",
+	-- 	upgrade = {
+	-- 		value = 1,
+	-- 		upgrade = "gam_luk",
+	-- 		category = "temporary"
+	-- 	}
+	-- }
 end)

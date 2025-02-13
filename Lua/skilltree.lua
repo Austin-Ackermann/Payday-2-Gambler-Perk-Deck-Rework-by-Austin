@@ -114,7 +114,7 @@ function SkillTreeTweakData:init(tweak_data)
 			upgrades = {
 				"player_passive_loot_drop_multiplier",
 				"temporary_loose_ammo_restore_health_3",
-				"player_gambler_dodge_2" 
+				-- "temporary_gam_luk_1" 
 			},
 			icon_xy = {
 				0,
@@ -139,7 +139,7 @@ function SkillTreeTweakData:init(tweak_data)
 	-- end
 
 	-- replacing the grinder deck with our new one
-	self.specializations[10] = newGambler -- will always be at index 9 when initialised.
+	self.specializations[10] = newGambler 
 	
 	-- table.insert(self.specializations, newGambler)
 	
