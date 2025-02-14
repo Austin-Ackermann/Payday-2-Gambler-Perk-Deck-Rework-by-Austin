@@ -1,5 +1,5 @@
 {
-	"menu_st_spec_10_desc" : "Edited by Austin. Ignore the summary stats on the left, they are wrong. Look at the cards themselves. \n The Gambler understands that heading into the furnace of battle requires skill, hardness, and more than a little luck. And some people just have it.\n\nLuck is an elusive quality. It requires preparation and forethought to get your pieces in place as to maximizes your chances of a return. Anyone can help the team win, but it takes the Gambler to help the team win big."
+	"menu_st_spec_10_desc" : "Gambler+ \n Ignore the summary stats, they are wrong. Look at the cards themselves. \n The Gambler understands that heading into the furnace of battle requires skill, hardness, and more than a little luck. And some people just have it.\n\nLuck is an elusive quality. It requires preparation and forethought to get your pieces in place as to maximizes your chances of a return. Anyone can help the team win, but it takes the Gambler to help the team win big."
 
 	"menu_deck10_1_desc" : "You regenerate between ##4## to ##5## health when picking up an ammo box. This effect has ##no## cooldown after being triggered.\n\nThe health regeneration is increased by an additional ##20%## when your health is lower than your crew's and can stack up to ##3## times, for a total of a ##60%## increase."
 
@@ -9,6 +9,5 @@
 	
 	"menu_deck10_7_desc" : "Minimum and maximum health regeneration is increased to ##5## to ##7## health."
 
-	"menu_deck10_9_desc" : "Minimum and maximum health regeneration is increased to ##7## to ##8## health.\n\nDeck Completion Bonus: The chance of getting a higher quality item during a Payday is increased by ##10%##."
-
+	"menu_deck10_9_desc" : "Minimum and maximum health regeneration is increased to ##7## to ##8## health. \n Every time you pick up an ammo box, gain ##2## lucky stacks, or lose ##1## lucky stack, depending on your remaining ammo percentage after the pickup. \n \n Lucky stacks give you ##5%## dodge per stack, and you have a max of ##10## stacks, for a total of ##50%## additional dodge. \n \n You have a ##0%## chance to lose stacks when under ##25%## total ammo, and the chance to lose slowly rises to a max of ##75%## chance to lose at ##100%## total ammo. \n\nDeck Completion Bonus: The chance of getting a higher quality item during a Payday is increased by ##10%##."
 }

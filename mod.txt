@@ -1,7 +1,7 @@
 {
-	"name"	:   "Gambler Perk Deck Rework",
-	"description"	:   "A personal rework of the Gambler perk deck by Austin. Removed the annoying cooldowns but nerfs the values to balance it. Now it can be stronger or weaker than base depending on how much ammo you collect. Ideally used with mx's overhaul mod to add more perk deck items.",
-	"author"   :   "Austin",
+	"name"	:   "Gambler+: Not just a label anymore (hopefully)",
+	"description"	:   "Removes the tedious cooldowns and rebalances the values, as well as adding the 'luck of the draw' perk to gambler's lvl 9 card. Ideally used with mx's overhaul mod to add an exclusive throwable for gambler and other perk decks.",
+	"author"   :   "ClumsyHunt3R",
 	"updates" : [
     {
         "revision" : 1,
