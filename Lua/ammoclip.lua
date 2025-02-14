@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 Hooks:PostHook(AmmoClip, "init", "ammoclip_init_byp", function(self, unit) 
     self.gambler_max_lucky_dodge_stacks = tweak_data.upgrades.gambler_max_lucky_dodge_stacks
     self.gambler_lucky_dodge_incriment = tweak_data.upgrades.gambler_lucky_dodge_incriment
@@ -6,26 +7,12 @@ Hooks:PostHook(AmmoClip, "init", "ammoclip_init_byp", function(self, unit)
     self.gambler_unlucky_chance_position = tweak_data.upgrades.gambler_unlucky_chance_position
 end)
 
--- AmmoClip.gambler_lucky_dodge_stacks = 0
--- AmmoClip.busy = false
-
--- function AmmoClip:get_current_lucky_stacks()
---     return self.gambler_lucky_dodge_stacks
--- end
-
--- function AmmoClip:set_current_lucky_stacks(stacks)
---     -- if not self.busy then
---         -- self.busy = true
---         self.gambler_lucky_dodge_stacks = stacks
---     -- end
--- end
-
 Hooks:PostHook(AmmoClip, "_pickup", "gambl_pickup", function(self, unit) 
     local player_manager = managers.player
     local inventory = unit:inventory()
 
-    if not unit:character_damage():is_downed() and player_manager:has_category_upgrade("temporary", "loose_ammo_restore_health") and player_manager:has_category_upgrade("player", "passive_loot_drop_multiplier") then
-        local new_dodge_difference = 0
+    -- attempted to make a skill for the new dodge mechanic, but as soon as it is equiped, the game crashes: tried to index null value in playermanager. Alternative:
+    if not unit:character_damage():is_downed() and player_manager:has_category_upgrade("temporary", "loose_ammo_restore_health") and player_manager:has_category_upgrade("player", "passive_loot_drop_multiplier") then 
         local unlucky_grace_period = self.gambler_unlucky_chance_position - self.gambler_unlucky_chance_cap -- the ammo floor, below which you are safe from being unlucky.  A.K.A,grace period.
 
         -- -- Gets the average of both weapons after picked up ammo is added to inventory
@@ -53,32 +40,11 @@ Hooks:PostHook(AmmoClip, "_pickup", "gambl_pickup", function(self, unit)
         end
         if rand > player_unlucky_chance then
             -- lucky
-            new_dodge_difference = self.gambler_lucky_dodge_incriment
+            player_manager:update_current_lucky_stacks(self.gambler_lucky_dodge_incriment, self.gambler_max_lucky_dodge_stacks)
         else
             -- unlucky
-            new_dodge_difference = self.gambler_lucky_dodge_decriment
+            player_manager:update_current_lucky_stacks(self.gambler_lucky_dodge_decriment, self.gambler_max_lucky_dodge_stacks)
         end
-            
-        local stonks = player_manager:get_current_lucky_stacks()
-
-        -- check
-        local temp_lucky_dodge_stacks = stonks + new_dodge_difference
-        -- if the new value is higher than the cap, the dodge difference must make bring the current stacks to the cap
-        if temp_lucky_dodge_stacks > self.gambler_max_lucky_dodge_stacks then 
-            new_dodge_difference = self.gambler_max_lucky_dodge_stacks - stonks
-        end
-        if temp_lucky_dodge_stacks < 0 then
-            -- if the buff is less than zero, the dodge difference must make bring the current stacks to zero
-            new_dodge_difference = -stonks 
-        end
-        local final_stonks = stonks + new_dodge_difference
-
-        managers.player:update_perm_dodge_buff(new_dodge_difference)
-        -- player_manager:set_perm_dodge_buff(final_stonks)
-        player_manager:set_current_lucky_stacks(final_stonks)
-        -- if self.busy then
-        --     self.busy = false
-        -- end
     end
 end)
     

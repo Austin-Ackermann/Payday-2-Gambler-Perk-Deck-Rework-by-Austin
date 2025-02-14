@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local skill_data = SkillTreeTweakData.init
 function SkillTreeTweakData:init(tweak_data)
 	skill_data(self, tweak_data)
@@ -114,7 +115,7 @@ function SkillTreeTweakData:init(tweak_data)
 			upgrades = {
 				"player_passive_loot_drop_multiplier",
 				"temporary_loose_ammo_restore_health_3",
-				-- "temporary_gam_luk_1" 
+				-- "temporary_gam_luk_1"  -- attempted to make a skill for the new dodge mechanic, but as soon as it is equiped, the game crashes: tried to index null value in playermanager.
 			},
 			icon_xy = {
 				0,
@@ -126,7 +127,6 @@ function SkillTreeTweakData:init(tweak_data)
 		category = "supportive"
 	}
 	
-	-- new dodge mechanic -- as soon as it is equiped, the game crashes: tried to index null value in playermanager. Turns out it was because this comment was next to it. 
 
 
 	-- finding the gambler deck
