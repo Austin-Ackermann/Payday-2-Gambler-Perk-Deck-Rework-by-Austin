@@ -1,0 +1,29 @@
+{
+	"name"	:   "Gambler+: Not just a label anymore (hopefully)",
+	"description"	:   "Removes the tedious cooldowns and rebalances the values, as well as adding the 'luck of the draw' perk to gambler's lvl 9 card. Ideally used with mx's overhaul mod to add an exclusive throwable for gambler and other perk decks.",
+	"author"   :   "ClumsyHunt3R",
+	"updates" : [
+    {
+        "revision" : 1,
+        "identifier" : "newborn",
+    }
+	],
+	"hooks"	:   [
+		{ 
+			"hook_id"	: "lib/tweak_data/skilltreetweakdata", 
+			"script_path" : "Lua/skilltree.lua" 
+		},
+		{ 
+			"hook_id" : "lib/tweak_data/upgradestweakdata", 
+			"script_path" : "Lua/upgradestweak.lua" 
+		},
+		{ 
+			"hook_id" : "lib/units/pickups/ammoclip", 
+			"script_path" : "Lua/ammoclip.lua" 
+		},
+		{
+			"hook_id" : "lib/managers/playermanager",
+			"script_path" : "Lua/playermanager.lua"
+		}
+	]
+}
